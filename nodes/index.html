@@ -1,0 +1,141 @@
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+  <script src="graph_nodes.js" type="text/javascript"></script>
+  <style>
+    #main{
+      height: 1500px;
+      width: 1500px;
+    }
+    #toolbar {
+
+    }
+    #wrapper {
+      margin: 0px;
+      /* assuming this shouldn't be absolute */
+      /*position: absolute;*/
+    }
+    body {
+      margin: 0;
+    }
+  </style>
+  <script>
+      
+  $('document').ready(function() {
+    
+    shiftDown = false;
+    
+    $(this).keydown(function(e) {  
+     if(e.keyCode == 16) {
+       console.log('Shift pressed');
+       shiftDown = true;
+     }
+    });
+     
+     $(this).keyup(function(e) {
+       shiftDown = false;
+     });
+   
+   $(this).mouseup(function(e) {
+     if(shiftDown) {
+       if(window.previouslyGrabbedNode && window.hoveredNode) {
+         console.log('Creating a new edge from ' +window.previouslyGrabbedNode.name+ ' to ' +window.hoveredNode.name+ '.');
+         graph.addEdge(window.previouslyGrabbedNode.name, window.hoveredNode.name).draw();
+       } 
+     }
+   });
+   
+   
+   
+   $('#export').click(function(event) {
+     event.preventDefault();
+   });
+
+  });
+  </script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="wrapper">
+    <svg id="main" xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <g id="cubes" stroke="red"></g>
+    </svg>
+  </div>
+
+<script>
+
+  var container = $('#cubes');
+  var wrapper = $('#wrapper');
+  graph = new Graph(container, wrapper);
+
+  // load in our nodes
+ /* graph.addNode('node0', 140, 170);  
+  graph.addNode('node1', 850, 150);
+  graph.addNode('node2', 830, 380);
+  graph.addNode('node3', 140, 480);
+  graph.addNode('node4', 740, 500);
+  graph.addNode('node5', 760, 900);*/
+  
+
+  /*for(var x = 0; x<= 10; x++) {
+    var nodeX = Math.floor(Math.random()*800);
+    var nodeY = Math.floor(Math.random()*800);
+    graph.addNode('node'+x, nodeX, nodeY);
+  }*/
+
+  
+  // load in our edges
+/*  graph.addEdge('node1', 'node2');
+  graph.addEdge('node5', 'node0');
+  graph.addEdge('node3', 'node2');
+  graph.addEdge('node4', 'node5');
+  graph.addEdge('node0', 'node1');
+  graph.addEdge('node1', 'node4');*/
+  
+ /* for(var x = 0; x<= 10; x++) {
+    var nodeFrom = Math.floor(Math.random()*10);
+    var nodeTo = Math.floor(Math.random()*10);
+    // prevent drawing an edge to itself
+    if(nodeFrom != nodeTo) {
+     graph.addEdge('node'+nodeFrom, 'node'+nodeTo); 
+    }
+  }*/
+  
+  graph.addNode('node0', 600, 300, 40);
+  graph.addNode('node1', 850, 150, 20);
+  graph.addNode('node2', 830, 380, 20);
+  graph.addNode('node3', 140, 480, 20);
+  graph.addNode('node4', 740, 500, 20);
+  graph.addNode('node5', 0, 0, 20);
+  graph.addNode('node6', 0, 0, 20);
+  
+  var childNodes = new Array(graph.nodes['node1'], graph.nodes['node2'], graph.nodes['node3'], graph.nodes['node4'], graph.nodes['node5'], graph.nodes['node6']);
+  graph.linkChildrenRadial(graph.nodes['node0'], childNodes);
+  
+  var childNodes = new Array();
+  
+  for(x=20; x<40; x++) {
+    graph.addNode('node'+x, 0, 0, 10);
+    childNodes.push(graph.nodes['node'+x]);
+  }
+  graph.linkChildrenRadial(graph.nodes['node5'], childNodes);
+  
+  var childNodes = new Array();
+
+  for(x=41; x<44; x++) {
+    graph.addNode('node'+x, 0, 0, 10);
+    childNodes.push(graph.nodes['node'+x]);
+  }
+  graph.linkChildrenRadial(graph.nodes['node1'], childNodes);
+  
+
+  graph.drawEdges();
+  graph.drawNodes();
+//  graph.nodes['node1'].circle.setAttributeNS(null,"fill","rgb(0,0,0)");
+ // graph.nodes['node16'].circle.setAttributeNS(null,"fill","rgb(0,0,255)");
+//  graph.findShortestPath(graph.nodes['node1'], graph.nodes['node16']);
+
+
+</script>
+</body>
+</html>

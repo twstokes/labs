@@ -1,0 +1,49 @@
+body {
+  font-family: verdana;
+}
+
+#container {
+  width: 1020px;
+  text-align: right;
+}
+
+#graph {
+  margin-top: 20px;
+  float: right;
+  width: 800px;
+  height: 500px;
+}
+
+#viewOptions {
+  margin-top: 40px;
+  padding-right: 10px;
+  width: 200px;
+  float: left;
+}
+
+#viewOptions ul {
+  list-style-type: none;
+  text-align: right;
+  line-height: 1.5em;
+  color: #aaa;
+}
+
+a,
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: #aaa;
+}
+
+a:hover {
+  color: #777;
+}
+
+#info, #timeText, #timeStamp {
+  font-style: oblique;
+  color: #888;
+  font-size: .6em;
+}
+
+

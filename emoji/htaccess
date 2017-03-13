@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule (.+)  index.php?request=$1  [L,QSA]

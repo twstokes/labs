@@ -1,0 +1,1 @@
+https://www.tannr.com/2015/04/14/emoji-urls/
