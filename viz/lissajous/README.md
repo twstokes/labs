@@ -1,7 +1,7 @@
 ## Lissajous Curves ##
 
 ### Setup ###
-- `yarn install`
+- `yarn`
 
 ### Running
 - `yarn start`
