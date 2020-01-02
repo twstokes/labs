@@ -6,7 +6,7 @@ The magic sauce for this one is the `ortho()` camera and `UV` texture mapping fr
 
 ### What's happening: ###
 
-Even though a cube may be rotated or in the distance, the texture (a grid) is painted proportionatly to a 2D mapping of the screen. The user first sees a perfect grid (only imperfect if not enough cubes were generated), and then discovers that this is an illusion once the camera is rotated.
+Even though a cube may be rotated or in the distance, the texture (a grid) is painted proportionately to a 2D mapping of the screen. The user first sees a perfect grid (only imperfect if not enough cubes were generated), and then discovers that this is an illusion once the camera is rotated.
 
 ### Gotchas: ###
 - The cubes (and the single shape they are all children of) are best generated before the `draw()` sequence. Before I did this, a perfect grid would always show regardless of the camera orientation.
