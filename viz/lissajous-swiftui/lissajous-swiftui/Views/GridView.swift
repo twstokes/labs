@@ -10,7 +10,8 @@ import SwiftUI
 
 struct GridView: View {
     @State var animate = false
-    let maxCurves = 8
+    let maxCurves = 5
+    let resolution = 2.0
 
     var body: some View {
         ZStack {
@@ -19,21 +20,36 @@ struct GridView: View {
             VStack {
                 HStack {
                     ForEach(0 ... self.maxCurves, id: \.self) { i in
-                        AnimatedCurveView(a: i, b: i, animate: self.animate)
+                        AnimatedCurveView(
+                            a: i,
+                            b: i,
+                            res: self.resolution,
+                            animate: self.animate
+                        )
                     }
                 }
 
                 HStack {
                     VStack {
                         ForEach(1 ... self.maxCurves, id: \.self) { i in
-                            AnimatedCurveView(a: i, b: i, animate: self.animate)
+                            AnimatedCurveView(
+                                a: i,
+                                b: i,
+                                res: self.resolution,
+                                animate: self.animate
+                            )
                         }
                     }
 
                     ForEach(1 ... self.maxCurves, id: \.self) { i in
                         VStack {
                             ForEach(1 ... self.maxCurves, id: \.self) { j in
-                                AnimatedCurveView(a: i, b: j, animate: self.animate)
+                                AnimatedCurveView(
+                                    a: i,
+                                    b: j,
+                                    res: self.resolution,
+                                    animate: self.animate
+                                )
                             }
                         }
                     }
@@ -46,7 +62,7 @@ struct GridView: View {
             .onDisappear() {
                 self.animate = false
             }
-        }.edgesIgnoringSafeArea(.all)
+        }
     }
 }
 

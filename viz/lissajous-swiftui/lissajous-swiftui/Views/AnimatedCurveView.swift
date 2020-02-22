@@ -11,28 +11,46 @@ import SwiftUI
 struct AnimatedCurveView: View {
     let a: Int
     let b: Int
+    var res = 1.0
     var animate = false
 
     var body: some View {
-        Curve(a: a, b: b)
+        Curve(a: a, b: b, res: res)
             .trim(from: self.animate ? 0 : 1, to: 1)
             .stroke(
                 Color.init(
-                    hue: b == 0 ? 0 : Double(a/b) / Double((a+b)),
+                    hue: b == 0 ? 0 : Double(a) / Double((a+b)),
                     saturation: 0.75,
                     brightness: 1
             ), lineWidth: 1)
+            .background(Color.black) // makes the entire view tappable
+            // really important for grid layout
+            .aspectRatio(contentMode: .fit)
             .animation(
                 Animation.linear(duration: 8)
                     .repeatForever(autoreverses: true)
             )
-            // really important for grid layout
-            .aspectRatio(contentMode: .fit)
+            .onTapGesture {
+                print("Curve \(self.a) \(self.b) tapped")
+            }
     }
 }
 
 struct AnimatedCurveView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimatedCurveView(a: 1, b: 2, animate: true)
+        PreviewWrapper()
+    }
+
+    // by having a preview wrapper, we can
+    // include state to kick off the animation
+    struct PreviewWrapper: View {
+        @State var animate = false
+
+        var body: some View {
+            AnimatedCurveView(a: 3, b: 5, animate: animate)
+                .onAppear {
+                    self.animate = true
+                }
+        }
     }
 }

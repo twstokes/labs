@@ -32,6 +32,8 @@ struct Curve: Shape {
     static func calculatePoints(a: Int, b: Int, res: Double) -> [CGPoint] {
         var points = [CGPoint]()
 
+        // a higher number for resolution increases performance
+        // by decreasing points
         for i in stride(from: 0, to: 360, by: res) {
             let rad = (.pi / 180) * Double(i)
             let x = sin(Double(a)*rad + Double.pi / 2)
