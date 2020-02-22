@@ -2,6 +2,8 @@
 
 This is not an original piece. This is a clone of [https://cacheflowe.com/art/digital/deepflat](https://cacheflowe.com/art/digital/deepflat) because I was nerd sniped by how cool it was, and had to figure it out. 
 
+![alt text](depth_grid.gif "Animation of depth grid")
+
 The magic sauce for this one is the `ortho()` camera and `UV` texture mapping from the perspective of the screen.
 
 ### What's happening: ###
