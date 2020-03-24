@@ -54,6 +54,6 @@ struct Curve: Shape {
             .applying(.init(
                 translationX: rect.size.width / 2,
                 y: rect.size.height / 2)
-            )
+        )
     }
 }
