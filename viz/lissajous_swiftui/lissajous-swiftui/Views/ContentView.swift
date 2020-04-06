@@ -9,33 +9,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    init() {
-        UITabBar.appearance().barTintColor = .black
-        UITabBar.appearance().backgroundColor = .black
-    }
+//    init() {
+//        UITabBar.appearance().barTintColor = .black
+//        UITabBar.appearance().backgroundColor = .black
+//    }
 
     var body: some View {
-        ZStack {
-            Color.black
-                .edgesIgnoringSafeArea(.all)
-
-            TabView {
-                Text("replace me")
-                    .tabItem {
-                        Image(systemName: "circle")
+        TabView {
+            Text("replace me")
+                .tabItem {
+                    Image(systemName: "circle")
                 }
-
-                    GridView()
-                        .background(Color.black)
-                        .tabItem {
-                            Image(systemName: "circle.grid.3x3")
-                            // todo - add gradient mask to tab button
-    //                        .mask(
-    //                            Gradient(colors: [Color.red, Color.blue])
-    //                        )
+                                
+            GridView()
+                .tabItem {
+                    Image(systemName: "circle.grid.3x3")
                 }
-                }
-
         }
     }
 }

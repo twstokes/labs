@@ -23,9 +23,7 @@ struct AnimatedCurveView: View {
                     saturation: 0.75,
                     brightness: 1
             ), lineWidth: 1)
-            .background(Color.black) // makes the entire view tappable
-            // really important for grid layout
-            .aspectRatio(contentMode: .fit)
+            .aspectRatio(contentMode: .fit) // really important for grid layout
             .animation(
                 Animation.linear(duration: 8)
                     .repeatForever(autoreverses: true)

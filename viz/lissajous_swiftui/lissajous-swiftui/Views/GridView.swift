@@ -10,50 +10,46 @@ import SwiftUI
 
 struct GridView: View {
     @State var animate = false
-    let maxCurves = 4
-    let resolution = 2.0
+    let maxCurves = 8
+    let resolution = 1.0
 
     var body: some View {
-        ZStack {
-            Color.black
+        VStack {
+            HStack {
+                RowView(
+                    range: 0 ... self.maxCurves,
+                    resolution: self.resolution,
+                    animate: self.animate
+                )
+            }
 
-            VStack {
-                HStack {
+            HStack {
+                VStack {
                     RowView(
-                        range: 0 ... self.maxCurves,
+                        range: 1 ... self.maxCurves,
                         resolution: self.resolution,
                         animate: self.animate
                     )
                 }
 
-                HStack {
+                ForEach(1 ... self.maxCurves, id: \.self) { i in
                     VStack {
                         RowView(
                             range: 1 ... self.maxCurves,
+                            b: i,
                             resolution: self.resolution,
                             animate: self.animate
                         )
                     }
-
-                    ForEach(1 ... self.maxCurves, id: \.self) { i in
-                        VStack {
-                            RowView(
-                                range: 1 ... self.maxCurves,
-                                b: i,
-                                resolution: self.resolution,
-                                animate: self.animate
-                            )
-                        }
-                    }
                 }
             }
-            .padding()
-            .onAppear() {
-                self.animate = true
-            }
-            .onDisappear() {
-                self.animate = false
-            }
+        }
+        .padding()
+        .onAppear() {
+            self.animate = true
+        }
+        .onDisappear() {
+            self.animate = false
         }
     }
 }
