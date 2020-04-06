@@ -23,6 +23,7 @@ struct AnimatedCurveView: View {
                     saturation: 0.75,
                     brightness: 1
             ), lineWidth: 1)
+            .background(Color.black) // so the curve is clickable
             .aspectRatio(contentMode: .fit) // really important for grid layout
             .animation(
                 Animation.linear(duration: 8)

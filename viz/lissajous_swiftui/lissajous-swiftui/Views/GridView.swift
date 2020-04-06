@@ -51,6 +51,7 @@ struct GridView: View {
         .onDisappear() {
             self.animate = false
         }
+        .background(Color.black)
     }
 }
 
