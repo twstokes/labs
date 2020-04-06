@@ -9,11 +9,6 @@
 import SwiftUI
 
 struct ContentView: View {
-//    init() {
-//        UITabBar.appearance().barTintColor = .black
-//        UITabBar.appearance().backgroundColor = .black
-//    }
-
     var body: some View {
         TabView {
             Text("replace me")
