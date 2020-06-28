@@ -10,17 +10,17 @@ import SwiftUI
 
 struct Curve_Previews: PreviewProvider {
     static var previews: some View {
-        Curve(a: 3, b: 5)
+        LJCurve(a: 3, b: 5)
             .stroke(Color.red)
             .border(Color.red)
     }
 }
 
-struct Curve: Shape {
-    let path: Path
+struct LJCurve: Shape {
+    private let path: Path
 
     init(a: Int, b: Int, res: Double = 1.0) {
-        let points = Curve.calculatePoints(a: a, b: b, res: res)
+        let points = LJCurve.calculatePoints(a: a, b: b, res: res)
 
         var path = Path()
         path.addLines(points)

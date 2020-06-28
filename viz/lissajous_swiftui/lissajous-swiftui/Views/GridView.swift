@@ -9,49 +9,53 @@
 import SwiftUI
 
 struct GridView: View {
-    @State var animate = false
-    let maxCurves = 8
-    let resolution = 1.0
+    private let maxCurves: Double = 10
+    @State private var curves: Double = 1
+    private var resolution: Double {
+        if curves > 5 {
+            return 2
+        }
+
+        return 1
+    }
 
     var body: some View {
         VStack {
-            HStack {
-                RowView(
-                    range: 0 ... self.maxCurves,
-                    resolution: self.resolution,
-                    animate: self.animate
-                )
-            }
-
-            HStack {
-                VStack {
+            VStack {
+                HStack {
                     RowView(
-                        range: 1 ... self.maxCurves,
-                        resolution: self.resolution,
-                        animate: self.animate
+                        range: 0 ... Int(self.curves),
+                        resolution: resolution
                     )
                 }
 
-                ForEach(1 ... self.maxCurves, id: \.self) { i in
+                HStack {
                     VStack {
                         RowView(
-                            range: 1 ... self.maxCurves,
-                            b: i,
-                            resolution: self.resolution,
-                            animate: self.animate
+                            range: 1 ... Int(self.curves),
+                            resolution: resolution
                         )
+                    }
+
+                    ForEach(1 ... Int(self.curves), id: \.self) { i in
+                        VStack {
+                            RowView(
+                                range: 1 ... Int(self.curves),
+                                b: i,
+                                resolution: resolution
+                            )
+                        }
                     }
                 }
             }
+            .padding()
+            .aspectRatio(contentMode: .fit)
+            .drawingGroup()
+
+            Slider(value: $curves.animation(.spring()), in: 1...maxCurves, step: 1)
+                .padding()
+                .accentColor(.purple)
         }
-        .padding()
-        .onAppear() {
-            self.animate = true
-        }
-        .onDisappear() {
-            self.animate = false
-        }
-        .background(Color.black)
     }
 }
 
@@ -59,15 +63,13 @@ struct RowView: View {
     let range: ClosedRange<Int>
     var b: Int?
     let resolution: Double
-    let animate: Bool
 
     var body: some View {
         ForEach(range, id: \.self) { i in
             AnimatedCurveView(
                 a: i,
                 b: self.b ?? i,
-                res: self.resolution,
-                animate: self.animate
+                res: self.resolution
             )
         }
     }

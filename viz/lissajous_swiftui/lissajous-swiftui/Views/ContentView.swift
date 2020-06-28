@@ -10,16 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            Text("replace me")
-                .tabItem {
-                    Image(systemName: "circle")
-                }
-                                
+        NavigationView {
             GridView()
-                .tabItem {
-                    Image(systemName: "circle.grid.3x3")
-                }
         }
     }
 }

@@ -11,26 +11,39 @@ import SwiftUI
 struct AnimatedCurveView: View {
     let a: Int
     let b: Int
-    var res = 1.0
-    var animate = false
+    var res: Double
+    @State private var animate = false
+
+    private let curve: LJCurve
+
+    init(a: Int, b: Int, res: Double = 1.0) {
+        self.a = a
+        self.b = b
+        self.res = res
+
+        curve = LJCurve(a: a, b: b, res: res)
+    }
+
+    private let animation = Animation.easeInOut(duration: 4).repeatForever(autoreverses: true)
 
     var body: some View {
-        Curve(a: a, b: b, res: res)
+        curve
             .trim(from: self.animate ? 0 : 1, to: 1)
             .stroke(
-                Color.init(
+                Color(
                     hue: b == 0 ? 0 : Double(a) / Double((a+b)),
                     saturation: 0.75,
                     brightness: 1
-            ), lineWidth: 1)
+            ), lineWidth: 2)
             .background(Color.black) // so the curve is clickable
-            .aspectRatio(contentMode: .fit) // really important for grid layout
-            .animation(
-                Animation.linear(duration: 8)
-                    .repeatForever(autoreverses: true)
-            )
+            .scaledToFit()
             .onTapGesture {
                 print("Curve \(self.a) \(self.b) tapped")
+            }
+            .onAppear {
+                withAnimation(animation) {
+                    self.animate = true
+                }
             }
     }
 }
@@ -46,7 +59,7 @@ struct AnimatedCurveView_Previews: PreviewProvider {
         @State var animate = false
 
         var body: some View {
-            AnimatedCurveView(a: 3, b: 5, animate: animate)
+            AnimatedCurveView(a: 3, b: 5)
                 .onAppear {
                     self.animate = true
                 }
