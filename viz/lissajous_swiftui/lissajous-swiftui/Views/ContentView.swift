@@ -10,9 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            GridView()
-        }
+        GridView()
+            .background(Color.black)
     }
 }
 
