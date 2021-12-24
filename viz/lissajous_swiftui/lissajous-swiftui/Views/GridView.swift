@@ -50,7 +50,6 @@ struct GridView: View {
             }
             .padding()
             .aspectRatio(contentMode: .fit)
-            .drawingGroup()
 
             Slider(value: $curves.animation(.spring()), in: 1...maxCurves, step: 1)
                 .padding()
